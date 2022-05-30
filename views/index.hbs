@@ -1,0 +1,36 @@
+<h2 class="center-align">Your Todos</h2>
+
+{{#if todos.length}}
+
+<ul>
+    {{#each todos}}
+    <li class="todo">
+        <label>
+            <form class="todo__show" action="/complete" method="post">
+                {{#if completed}}
+                <input type="checkbox" checked name="completed">
+                <span class="completed">{{ title }}</span>
+                {{else}}
+                <input type="checkbox" name="completed">
+                <span>{{title}}</span>
+                {{/if}}
+
+                <input type="hidden" value="{{_id}}" name="id">
+                <button type="submit" class="btn btn-small waves-effect">Save</button>
+            </form>
+
+            <form class="todo__delete" action="/delete?_method=DELETE" method="post">
+                <input type="hidden" value="{{_id}}" name="id">
+                <button type="submit" class="btn btn-small red lighten-2 waves-effect">Delete</button>
+            </form>
+        </label>
+    </li>
+    {{/each}}
+</ul>
+
+
+{{else}}
+<div class="empty">
+    <span>Todo list is empty</span>
+</div>
+{{/if}}
